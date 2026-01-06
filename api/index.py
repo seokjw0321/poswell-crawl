@@ -82,10 +82,25 @@ def home(path):
     # 2. URL 생성
     target_url = f"https://m.poswel.co.kr/fmenu//index.php?s_area=C&s_uid=13&section=%EC%A0%90%EC%8B%AC&s_date_y={yyyy}&s_date_m={mm}&s_date_d={dd}"
 
-    # 3. 크롤링 준비
+        # 3. 크롤링 준비
     headers = {
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1",
+        # 아이폰 사파리 브라우저인 척 위장
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1",
+        
+        # [중요] 나 이 사이트에서 왔어! (이게 없으면 봇으로 의심함)
+        "Referer": "https://m.poswel.co.kr/fmenu/index.php",
+        "Origin": "https://m.poswel.co.kr",
+        
+        # 한국어 사용자임을 강조
+        "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        
+        # 기타 보안 헤더
+        "Upgrade-Insecure-Requests": "1",
+        "Cache-Control": "max-age=0",
+        "Connection": "keep-alive"
     }
+
     
     session = requests.Session()
     session.mount('https://', LegacySSLAdapter())
